@@ -1,0 +1,52 @@
+.postContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+
+  padding: 1rem 0;
+  margin: 2rem 1.75rem;
+
+  border-top: 1px solid var(--black-400);
+  div {
+    font-weight: 600;
+    span {
+      display: block;
+    }
+
+    a {
+      color: var(--pink-500);
+      &:hover {
+        filter: brightness(0.8);
+      }
+    }
+  }
+}
+
+.listPostContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  margin: 2rem 0;
+}
+
+.prev {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.next {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+  height: 100%;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
