@@ -1,12 +1,17 @@
 .postContainer {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-
+  overflow: hidden;
   padding: 1rem 0;
   margin: 2rem 1.75rem;
 
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+  }
+
   border-top: 1px solid var(--black-400);
-  div {
+  > div {
     font-weight: 600;
     span {
       display: block;
@@ -34,7 +39,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  transition: transform 0.3s ease-in-out;
+  @media (max-width: 720px) {
+    transform: translateX(-300px);
+  }
 }
 
 .next {
@@ -42,11 +50,30 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: right;
-  height: 100%;
+  transition: transform 0.3s ease-in-out;
+
+  @media (max-width: 720px) {
+    transform: translateX(300px);
+  }
 }
 
 .logo {
   display: flex;
   align-items: center;
   justify-content: center;
+  a {
+    cursor: pointer;
+  }
+}
+
+.prevWrapper {
+  &:hover div {
+    transform: translateX(0);
+  }
+}
+
+.nexWrapper {
+  &:hover div {
+    transform: translateX(0);
+  }
 }

@@ -11,39 +11,46 @@ interface HeaderProps {
     title: string;
     uid: string;
   };
+  preview?: boolean;
 }
 
-const Hedaer: React.FC<HeaderProps> = ({ nextPage, prevPage }) => {
+const Hedaer: React.FC<HeaderProps> = ({ nextPage, prevPage, preview }) => {
   return (
     <div
       className={
         nextPage || prevPage ? styles.postContainer : styles.listPostContainer
       }
     >
-      <div>
-        {prevPage && (
-          <div className={styles.prev}>
-            <span>{prevPage.title}</span>
-            <Link href={`/post/${prevPage.uid}`}>
-              <a>Post Anterior</a>
-            </Link>
-          </div>
-        )}
+      <div className={styles.prevWrapper}>
+        {preview
+          ? null
+          : prevPage && (
+              <div className={styles.prev}>
+                <span>{prevPage.title}</span>
+                <Link href={`/post/${prevPage.uid}`}>
+                  <a>Post Anterior</a>
+                </Link>
+              </div>
+            )}
       </div>
       <Link href="/">
-        <a className={styles.logo}>
-          <img src="/assets/Logo.svg" alt="logo" />
-        </a>
+        <div className={styles.logo}>
+          <a>
+            <img src="/assets/Logo.svg" alt="logo" />
+          </a>
+        </div>
       </Link>
-      <div>
-        {nextPage && (
-          <div className={styles.next}>
-            <span>{nextPage.title}</span>
-            <Link href={`/post/${nextPage.uid}`}>
-              <a>Próximo post</a>
-            </Link>
-          </div>
-        )}
+      <div className={styles.nexWrapper}>
+        {preview
+          ? null
+          : nextPage && (
+              <div className={styles.next}>
+                <span>{nextPage.title}</span>
+                <Link href={`/post/${nextPage.uid}`}>
+                  <a>Próximo post</a>
+                </Link>
+              </div>
+            )}
       </div>
     </div>
   );

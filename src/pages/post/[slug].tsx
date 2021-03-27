@@ -19,6 +19,7 @@ import styles from './post.module.scss';
 
 export interface Post {
   first_publication_date: string | null;
+  last_publication_date: string | null;
   uid: string;
   id: string;
   nextPage: null | {
@@ -67,7 +68,9 @@ const Post: React.FC<PostProps> = ({ post, preview }) => {
 
     return () => {
       const chat = document.querySelector('.utterances');
-      chat.remove();
+      if (chat) {
+        chat.remove();
+      }
     };
   }, [post]);
 
@@ -76,19 +79,23 @@ const Post: React.FC<PostProps> = ({ post, preview }) => {
   }
 
   const formatedPost = formatPost(post);
-  const { createdAt, data } = formatedPost;
+  const { createdAt, editedAt, data } = formatedPost;
 
   return (
     <>
       <Head>
         <title>{data.title} | BlogDeV</title>
       </Head>
-      <Header nextPage={post.nextPage} prevPage={post.prevPage} />
+      <Header
+        nextPage={post.nextPage}
+        prevPage={post.prevPage}
+        preview={preview}
+      />
       <div className={styles.banner}>
         <img src={data.banerUrl} alt="banner" />
       </div>
       <main className={styles.container}>
-        <h1>{post.data.title}</h1>
+        <h1>{data.title}</h1>
         <div>
           <span>
             <FiCalendar /> <span>{createdAt}</span>
@@ -101,6 +108,7 @@ const Post: React.FC<PostProps> = ({ post, preview }) => {
             <FiClock /> <span>{data.minutesReading} min</span>
           </span>
         </div>
+        <p>{editedAt}</p>
         {data.content.map(contentItem => {
           return (
             <article className={styles.content} key={contentItem.heading}>
@@ -188,6 +196,7 @@ export const getStaticProps: GetStaticProps = async ({
 
   const post = {
     first_publication_date: response.first_publication_date,
+    last_publication_date: response.last_publication_date,
     uid: response.uid,
     id: response.id,
     nextPage,

@@ -13,7 +13,6 @@
   > div {
     display: flex;
     align-items: center;
-    margin-bottom: 5rem;
     color: var(--gray-300);
 
     span {
@@ -29,13 +28,18 @@
       }
     }
   }
+  p {
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+    color: var(--gray-300);
+  }
 }
 
 .banner {
-  position: relative;
   img {
-    height: 270px;
+    height: 16rem;
     width: 100%;
+    object-fit: fill;
   }
 }
 
@@ -54,11 +58,6 @@
     }
     strong {
       color: var(--pink-500);
-    }
-
-    img {
-      width: 100%;
-      object-fit: contain;
     }
   }
 }

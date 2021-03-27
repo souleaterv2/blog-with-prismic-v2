@@ -8,6 +8,7 @@ import { Post } from '../pages/index';
 
 interface FormatedPost {
   createdAt: string;
+  editedAt: string;
   data: {
     minutesReading: number;
     title: string;
@@ -50,6 +51,16 @@ export const formatPost = (post: PostPage): FormatedPost => {
     createdAt: format(new Date(post.first_publication_date), 'd MMM y', {
       locale: ptBR,
     }),
+    editedAt:
+      post.first_publication_date === post.last_publication_date
+        ? null
+        : format(
+            new Date(post.last_publication_date),
+            "*'editado em' d MMM y, 'às' k:m",
+            {
+              locale: ptBR,
+            }
+          ),
     data: {
       minutesReading,
       author: post.data.author,
